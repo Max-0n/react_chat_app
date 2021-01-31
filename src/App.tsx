@@ -5,17 +5,7 @@ import { useForm } from "react-hook-form";
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import MessageIcon from '@material-ui/icons/Message';
-
-type ChatMessage = {
-  id: string,
-  isOwner: boolean,
-  message: string,
-  reply?: ChatMessage
-}
-
-type ChatForm = {
-  message: string
-}
+import { ChatMessage, ChatForm } from './interfaces';
 
 function App() {
   const { register, handleSubmit, setValue } = useForm();
@@ -44,78 +34,61 @@ function App() {
     {
       id: String(Math.random()),
       isOwner: true,
-      message: 'W8a minute pls'
-    },
-    {
-      id: String(Math.random()),
-      isOwner: false,
-      message: 'Okay',
-      reply: {
-        id: String(Math.random()),
-        isOwner: true,
-        message: 'W8a minute pls'
-      }
+      message: 'W8 a minute pls'
     },
     {
       id: String(Math.random()),
       isOwner: true,
-      message: 'W8a minute pls'
+      message: 'I\'m trying to find my task...'
     },
     {
       id: String(Math.random()),
       isOwner: false,
-      message: 'Okay',
-      reply: {
-        id: String(Math.random()),
-        isOwner: true,
-        message: 'W8a minute pls'
-      }
-    },
-    {
-      id: String(Math.random()),
-      isOwner: true,
-      message: 'W8a minute pls'
-    },
-    {
-      id: String(Math.random()),
-      isOwner: false,
-      message: 'Okay',
-      reply: {
-        id: String(Math.random()),
-        isOwner: true,
-        message: 'W8a minute pls'
-      }
-    },
-    {
-      id: String(Math.random()),
-      isOwner: true,
-      message: 'Hello, i\'m fine!',
+      message: 'Ok',
       reply: {
         id: String(Math.random()),
         isOwner: false,
-        message: 'How are you doing?'
+        message: 'W8a minute pls'
+      }
+    },
+    {
+      id: String(Math.random()),
+      isOwner: true,
+      message: 'Well I can\'t do that right now 😞'
+    },
+    {
+      id: String(Math.random()),
+      isOwner: false,
+      message: 'Why? Can I help you with that?',
+      reply: {
+        id: String(Math.random()),
+        isOwner: true,
+        message: 'Well I can\'t do that right now 😞'
+      }
+    },
+    {
+      id: String(Math.random()),
+      isOwner: true,
+      message: 'No, just let me 1 more day to try again when my bro will comeback',
+      reply: {
+        id: String(Math.random()),
+        isOwner: false,
+        message: 'Why? Can I help you with that?'
       },
     },
     {
       id: String(Math.random()),
-      isOwner: true,
-      message: 'W8a minute pls'
-    },
-    {
-      id: String(Math.random()),
       isOwner: false,
-      message: 'Okay',
+      message: 'Shure, I can w8 till next year 😂',
       reply: {
         id: String(Math.random()),
         isOwner: true,
-        message: 'W8a minute pls'
+        message: 'No, just let me 1 more day to try again when my bro will comeback'
       }
     }
   ]);
 
   const onSubmit = (from: ChatForm) => {
-    console.log('34', from);
-
     const chatItem: ChatMessage = {
       id: String(Math.random()),
       isOwner: true,
@@ -129,7 +102,6 @@ function App() {
 
   const replyUpdated = (reply: any) => {
     setReplyMessage(reply);
-    console.log(replyMessage);
   }
 
   return (

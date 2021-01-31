@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { ChatMessage } from '../interfaces';
 import './ChatView.scss';
 
 function ChatView({ chatList, replyUpdated }: any) {
-  const [replyMessage, setReplyMessage] = useState<any | null>(null);
+  const [replyMessage, setReplyMessage] = useState<ChatMessage | null>(null);
   const wrapper = useRef<any | null>(null);
 
   useEffect(() => {
-    console.log('$', chatList);
     setReplyMessage(null);
     replyUpdated(null);
     wrapper.current.scrollTop = wrapper.current.scrollHeight;

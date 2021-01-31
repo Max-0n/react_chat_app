@@ -4,7 +4,8 @@
   max-width: 500px;
   max-height: 500px;
   height: 100%;
-  background-color: #f1f2f3;
+  background-color: #f3f4f5;
+  border-radius: 6px;
   overflow: auto;
 
   .wrapper {
@@ -23,6 +24,7 @@
 
     &.owner {
       align-self: flex-end;
+      color: #2b3c9c;
     }
   }
 }
