@@ -1,0 +1,28 @@
+.ChatView {
+  margin: 20px auto;
+  text-align: center;
+  max-width: 500px;
+  max-height: 500px;
+  height: 100%;
+  background-color: #f1f2f3;
+  overflow: auto;
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    height: auto;
+  }
+
+  .item {
+    text-align: left;
+    max-width: 80%;
+    align-self: flex-start;
+    margin: 5px;
+    padding: 5px;
+
+    &.owner {
+      align-self: flex-end;
+    }
+  }
+}

@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import './ChatView.scss';
 
 function ChatView({ chatList, replyUpdated }: any) {
-
   const [replyMessage, setReplyMessage] = useState<any | null>(null);
+  const wrapper = useRef<any | null>(null);
 
   useEffect(() => {
     console.log('$', chatList);
     setReplyMessage(null);
+    replyUpdated(null);
+    wrapper.current.scrollTop = wrapper.current.scrollHeight;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chatList]);
 
   const onClickHandler = (chatItem: any) => {
@@ -20,17 +24,19 @@ function ChatView({ chatList, replyUpdated }: any) {
   };
 
   return (
-    <section className="ChatView">
-      <ol>
+    <section className="ChatView" ref={wrapper}>
+      <div className="wrapper">
         {chatList.map((chatItem: any) => (
-          <li
+          <div
+            className={`item ${chatItem.isOwner && 'owner'}`}
             key={chatItem.id}
             onClick={() => { onClickHandler(chatItem) }}
           >
+            {chatItem.reply ? <q>{chatItem.reply.message}</q> : null}
             {chatItem.message}
-          </li>
+          </div>
         ))}
-      </ol>
+      </div>
     </section>
   );
 }

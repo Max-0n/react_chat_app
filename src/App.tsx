@@ -19,7 +19,99 @@ type ChatForm = {
 
 function App() {
   const { register, handleSubmit, setValue } = useForm();
-  const [chatList, setChatList] = useState<ChatMessage[]>([]);
+  const [replyMessage, setReplyMessage] = useState<ChatMessage>();
+  const [chatList, setChatList] = useState<ChatMessage[]>([
+    {
+      id: String(Math.random()),
+      isOwner: false,
+      message: 'Hello'
+    },
+    {
+      id: String(Math.random()),
+      isOwner: false,
+      message: 'How are you doing?'
+    },
+    {
+      id: String(Math.random()),
+      isOwner: true,
+      message: 'Hello, i\'m fine!',
+      reply: {
+        id: String(Math.random()),
+        isOwner: false,
+        message: 'How are you doing?'
+      },
+    },
+    {
+      id: String(Math.random()),
+      isOwner: true,
+      message: 'W8a minute pls'
+    },
+    {
+      id: String(Math.random()),
+      isOwner: false,
+      message: 'Okay',
+      reply: {
+        id: String(Math.random()),
+        isOwner: true,
+        message: 'W8a minute pls'
+      }
+    },
+    {
+      id: String(Math.random()),
+      isOwner: true,
+      message: 'W8a minute pls'
+    },
+    {
+      id: String(Math.random()),
+      isOwner: false,
+      message: 'Okay',
+      reply: {
+        id: String(Math.random()),
+        isOwner: true,
+        message: 'W8a minute pls'
+      }
+    },
+    {
+      id: String(Math.random()),
+      isOwner: true,
+      message: 'W8a minute pls'
+    },
+    {
+      id: String(Math.random()),
+      isOwner: false,
+      message: 'Okay',
+      reply: {
+        id: String(Math.random()),
+        isOwner: true,
+        message: 'W8a minute pls'
+      }
+    },
+    {
+      id: String(Math.random()),
+      isOwner: true,
+      message: 'Hello, i\'m fine!',
+      reply: {
+        id: String(Math.random()),
+        isOwner: false,
+        message: 'How are you doing?'
+      },
+    },
+    {
+      id: String(Math.random()),
+      isOwner: true,
+      message: 'W8a minute pls'
+    },
+    {
+      id: String(Math.random()),
+      isOwner: false,
+      message: 'Okay',
+      reply: {
+        id: String(Math.random()),
+        isOwner: true,
+        message: 'W8a minute pls'
+      }
+    }
+  ]);
 
   const onSubmit = (from: ChatForm) => {
     console.log('34', from);
@@ -27,24 +119,30 @@ function App() {
     const chatItem: ChatMessage = {
       id: String(Math.random()),
       isOwner: true,
-      message: from.message
+      message: from.message,
+      reply: replyMessage
     }
 
     setChatList([...chatList, chatItem]);
     setValue("message", "");
   };
 
-  const replyUpdated = (value: any) => {
-    console.log('raplyHandler', value)
+  const replyUpdated = (reply: any) => {
+    setReplyMessage(reply);
+    console.log(replyMessage);
   }
 
   return (
     <div className="App">
       <ChatView chatList={chatList} replyUpdated={replyUpdated} />
+
       <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
+        {replyMessage ? <q>{replyMessage.message}</q> : null}
         <TextField
+          className="input"
           name="message"
           type="text"
+          fullWidth
           inputRef={register}
           label="Write message here..." />
         <IconButton color="primary" type="submit">
