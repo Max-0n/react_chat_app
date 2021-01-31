@@ -13,7 +13,7 @@ function ChatView({ chatList, replyUpdated }: any) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chatList]);
 
-  const onClickHandler = (chatItem: any) => {
+  const onMessageClickHandler = (chatItem: any) => {
     if (replyMessage && replyMessage === chatItem) {
       setReplyMessage(null);
       replyUpdated(null);
@@ -30,7 +30,7 @@ function ChatView({ chatList, replyUpdated }: any) {
           <div
             className={`item ${chatItem.isOwner && 'owner'}`}
             key={chatItem.id}
-            onClick={() => { onClickHandler(chatItem) }}
+            onClick={() => { onMessageClickHandler(chatItem) }}
           >
             {chatItem.reply ? <q>{chatItem.reply.message}</q> : null}
             {chatItem.message}
